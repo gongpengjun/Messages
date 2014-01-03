@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GPJSecondViewController : UIViewController
+@interface GPJSecondViewController : UITableViewController
 
 @end
