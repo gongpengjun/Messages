@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C41654111876D100005E12C5 /* CookieManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C41654101876D100005E12C5 /* CookieManager.m */; };
 		C45DFF171876573A00674A7E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C45DFF161876573A00674A7E /* Foundation.framework */; };
 		C45DFF191876573A00674A7E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C45DFF181876573A00674A7E /* CoreGraphics.framework */; };
 		C45DFF1B1876573A00674A7E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C45DFF1A1876573A00674A7E /* UIKit.framework */; };
@@ -41,6 +42,8 @@
 /* Begin PBXFileReference section */
 		2F4DD3A6F59E486D80CCB2C7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BE5AAF15B4D44E7BD0CF793 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		C416540F1876D100005E12C5 /* CookieManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CookieManager.h; sourceTree = "<group>"; };
+		C41654101876D100005E12C5 /* CookieManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CookieManager.m; sourceTree = "<group>"; };
 		C45DFF131876573A00674A7E /* Messages.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Messages.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C45DFF161876573A00674A7E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C45DFF181876573A00674A7E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -184,6 +187,8 @@
 				C46D2E9C1876A4B90074957D /* LoginView.m */,
 				C46D2E9D1876A4B90074957D /* LoginViewController.h */,
 				C46D2E9E1876A4B90074957D /* LoginViewController.m */,
+				C416540F1876D100005E12C5 /* CookieManager.h */,
+				C41654101876D100005E12C5 /* CookieManager.m */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -324,6 +329,7 @@
 				C46D2EA01876A4B90074957D /* LoginView.m in Sources */,
 				C46D2E9518767B150074957D /* GPJSecondViewController.m in Sources */,
 				C45DFF2D1876573A00674A7E /* GPJFirstViewController.m in Sources */,
+				C41654111876D100005E12C5 /* CookieManager.m in Sources */,
 				C45DFF271876573A00674A7E /* GPJAppDelegate.m in Sources */,
 				C46D2EA11876A4B90074957D /* LoginViewController.m in Sources */,
 				C46D2EA41876AB700074957D /* GPJAboutViewController.m in Sources */,

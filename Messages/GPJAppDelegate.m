@@ -9,11 +9,13 @@
 #import "GPJAppDelegate.h"
 #import "LoginViewController.h"
 #import "LoginConstants.h"
+#import "CookieManager.h"
 
 @implementation GPJAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [CookieManager loadCookies];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logoutHandler:) name:LOGOUT_NOTIFICATION object:nil];
     [self performSelector:@selector(startLogin) withObject:nil afterDelay:0];
     return YES;
@@ -67,7 +69,7 @@
 - (void)logoutHandler:(NSNotification *)notification {
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"userLoggedIn"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    
+    [CookieManager deleteCookies];
     [self showLoginViewAnimated:YES];
 }
 

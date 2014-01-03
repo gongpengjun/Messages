@@ -11,6 +11,7 @@
 #import "LoginConstants.h"
 #import "AFNetworking.h"
 #import "MBProgressHUD.h"
+#import "CookieManager.h"
 
 @interface LoginViewController ()
 @property (nonatomic, strong) LoginView *loginView;;
@@ -62,6 +63,7 @@
                   [[NSUserDefaults standardUserDefaults] setObject:userDict[@"username"] forKey:@"username"];
                   [[NSUserDefaults standardUserDefaults] synchronize];
                   [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+                  [CookieManager saveCookies];
               }
           } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
               NSLog(@"Error: %@", error);
