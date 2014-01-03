@@ -12,4 +12,6 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
+- (void)showLoginViewAnimated:(BOOL)animated;
+
 @end

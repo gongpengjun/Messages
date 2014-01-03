@@ -37,15 +37,18 @@
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSString *url = @"http://api.gongpengjun.com:90/messages/get.php";
-    [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"JSON: %@", responseObject);
-        self.jsonArray = responseObject;
-        [self.tableView reloadData];
-        [self performSelector:@selector(loadData) withObject:nil afterDelay:5];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
-        [self performSelector:@selector(loadData) withObject:nil afterDelay:5];
-    }];
+    [manager GET:url
+      parameters:nil
+         success:^(AFHTTPRequestOperation *operation, id responseObject) {
+             //NSLog(@"JSON: %@", responseObject);
+             self.jsonArray = responseObject;
+             [self.tableView reloadData];
+             [self performSelector:@selector(loadData) withObject:nil afterDelay:5];
+         }
+         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+             NSLog(@"Error: %@", error);
+             [self performSelector:@selector(loadData) withObject:nil afterDelay:5];
+         }];
 }
 
 #pragma mark - Table view data source

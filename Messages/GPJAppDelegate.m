@@ -7,12 +7,15 @@
 //
 
 #import "GPJAppDelegate.h"
+#import "LoginViewController.h"
+#import "LoginConstants.h"
 
 @implementation GPJAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logoutHandler:) name:LOGOUT_NOTIFICATION object:nil];
+    [self performSelector:@selector(startLogin) withObject:nil afterDelay:0];
     return YES;
 }
 							
@@ -41,6 +44,31 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+#pragma mark - Login
+
+- (void)startLogin
+{
+    BOOL isUserLoggedIn = [[NSUserDefaults standardUserDefaults] boolForKey:@"userLoggedIn"];
+    
+    if( !isUserLoggedIn ){
+        [self showLoginViewAnimated:NO];
+    }
+}
+
+- (void)showLoginViewAnimated:(BOOL)animated
+{
+    LoginViewController *loginVC = [[LoginViewController alloc] init];
+    [self.window.rootViewController presentViewController:loginVC animated:animated completion:nil];
+    
+}
+
+- (void)logoutHandler:(NSNotification *)notification {
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"userLoggedIn"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [self showLoginViewAnimated:YES];
 }
 
 @end

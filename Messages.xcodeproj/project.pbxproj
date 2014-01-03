@@ -22,6 +22,9 @@
 		C45DFF431876573A00674A7E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C45DFF411876573A00674A7E /* InfoPlist.strings */; };
 		C45DFF451876573A00674A7E /* MessagesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C45DFF441876573A00674A7E /* MessagesTests.m */; };
 		C46D2E9518767B150074957D /* GPJSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46D2E9418767B150074957D /* GPJSecondViewController.m */; };
+		C46D2EA01876A4B90074957D /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = C46D2E9C1876A4B90074957D /* LoginView.m */; };
+		C46D2EA11876A4B90074957D /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46D2E9E1876A4B90074957D /* LoginViewController.m */; };
+		C46D2EA41876AB700074957D /* GPJAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46D2EA31876AB700074957D /* GPJAboutViewController.m */; };
 		FF2FD12FFC974B069D018D41 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F4DD3A6F59E486D80CCB2C7 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +62,13 @@
 		C45DFF441876573A00674A7E /* MessagesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessagesTests.m; sourceTree = "<group>"; };
 		C46D2E9318767B150074957D /* GPJSecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPJSecondViewController.h; sourceTree = "<group>"; };
 		C46D2E9418767B150074957D /* GPJSecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPJSecondViewController.m; sourceTree = "<group>"; };
+		C46D2E991876A4B90074957D /* LoginConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginConstants.h; sourceTree = "<group>"; };
+		C46D2E9B1876A4B90074957D /* LoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginView.h; sourceTree = "<group>"; };
+		C46D2E9C1876A4B90074957D /* LoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginView.m; sourceTree = "<group>"; };
+		C46D2E9D1876A4B90074957D /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		C46D2E9E1876A4B90074957D /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		C46D2EA21876AB700074957D /* GPJAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPJAboutViewController.h; sourceTree = "<group>"; };
+		C46D2EA31876AB700074957D /* GPJAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPJAboutViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +138,9 @@
 				C45DFF2C1876573A00674A7E /* GPJFirstViewController.m */,
 				C46D2E9318767B150074957D /* GPJSecondViewController.h */,
 				C46D2E9418767B150074957D /* GPJSecondViewController.m */,
+				C46D2EA21876AB700074957D /* GPJAboutViewController.h */,
+				C46D2EA31876AB700074957D /* GPJAboutViewController.m */,
+				C46D2E981876A4B90074957D /* Login */,
 				C45DFF311876573A00674A7E /* Images.xcassets */,
 				C45DFF1D1876573A00674A7E /* Supporting Files */,
 			);
@@ -161,6 +174,18 @@
 				C45DFF411876573A00674A7E /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C46D2E981876A4B90074957D /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				C46D2E991876A4B90074957D /* LoginConstants.h */,
+				C46D2E9B1876A4B90074957D /* LoginView.h */,
+				C46D2E9C1876A4B90074957D /* LoginView.m */,
+				C46D2E9D1876A4B90074957D /* LoginViewController.h */,
+				C46D2E9E1876A4B90074957D /* LoginViewController.m */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -296,9 +321,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C46D2EA01876A4B90074957D /* LoginView.m in Sources */,
 				C46D2E9518767B150074957D /* GPJSecondViewController.m in Sources */,
 				C45DFF2D1876573A00674A7E /* GPJFirstViewController.m in Sources */,
 				C45DFF271876573A00674A7E /* GPJAppDelegate.m in Sources */,
+				C46D2EA11876A4B90074957D /* LoginViewController.m in Sources */,
+				C46D2EA41876AB700074957D /* GPJAboutViewController.m in Sources */,
 				C45DFF231876573A00674A7E /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
