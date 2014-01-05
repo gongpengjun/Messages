@@ -68,13 +68,20 @@
     return YES;
 }
 
+#pragma mark - Image
+
+- (UIImage*)imageToUpload {
+    return [UIImage imageNamed:@"logout_button"];
+}
+
 #pragma mark - Button Actions
 
 - (IBAction)sendAction:(id)sender
 {
-    if(self.messageTextField.text.length == 0)
+    UIImage *image = [self imageToUpload];
+    if(self.messageTextField.text.length == 0 || !image)
     {
-        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:nil message:@"Message is empty!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:nil message:@"Message or Image is empty!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alertView show];
         return;
     }
@@ -92,10 +99,13 @@
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
     hud.dimBackground = YES;
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSString *url = @"http://api.gongpengjun.com:90/messages/post.php";
+    NSString *url = @"http://api.gongpengjun.com:90/messages/comboupload.php";
     NSDictionary *parameters = @{@"name": username, @"message" : self.messageTextField.text};
     [manager POST:url
        parameters:parameters
+constructingBodyWithBlock:^(id <AFMultipartFormData> formData) {
+        [formData appendPartWithFileData:UIImageJPEGRepresentation(image, 1) name:@"userfile" fileName:@"logout_button.png" mimeType:@"image/png"];
+}
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
               NSLog(@"JSON: %@", responseObject);
               // Configure for text only and offset down
