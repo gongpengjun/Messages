@@ -10,6 +10,7 @@
 #import "MBProgressHUD.h"
 #import "AFNetworking.h"
 #import "LoginConstants.h"
+#import "UIImage+Resize.h"
 
 #define BARBUTTON(TITLE, SELECTOR) [[UIBarButtonItem alloc] initWithTitle:TITLE style:UIBarButtonItemStylePlain target:self action:SELECTOR]
 #define SYSBARBUTTON(ITEM, SELECTOR) [[UIBarButtonItem alloc] initWithBarButtonSystemItem:ITEM target:self action:SELECTOR]
@@ -113,14 +114,36 @@
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo {
-    if(image) {
-        self.gottenImage = image;
+    self.gottenImage = [self resizedImage:image];
+    if(self.gottenImage) {
         self.imageView.image = image;
     } else {
-        self.gottenImage = nil;
         self.imageView.image = [UIImage imageNamed:@"placeholder"];
     }
     [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+#define kUploadImageMaxSize 1600
+
+- (UIImage*)resizedImage:(UIImage*)originalImage {
+    if(!originalImage)
+        return nil;
+    double factor = (double)originalImage.size.width / (double)originalImage.size.height;
+    CGFloat width  = 0;
+    CGFloat height = 0;
+    if (originalImage.size.height > originalImage.size.width) {
+        height = kUploadImageMaxSize;
+        width  = kUploadImageMaxSize * factor;
+    } else {
+        width  = kUploadImageMaxSize;
+        height = kUploadImageMaxSize / factor;
+    }
+    
+    UIImage* retImage = originalImage;
+    if (MAX(originalImage.size.height, originalImage.size.width) > kUploadImageMaxSize) {
+        retImage = [originalImage resizedImage:CGSizeMake(width, height) interpolationQuality:kCGInterpolationHigh];
+    }
+    return retImage;
 }
 
 #pragma mark - Button Actions
@@ -155,9 +178,12 @@
     [manager POST:url
        parameters:parameters
 constructingBodyWithBlock:^(id <AFMultipartFormData> formData) {
-    // the data size of jpg is smaller than png
+    // the data size of jpg is much smaller than png (1200x1600:1.5MB(jpg)/3.5MB(png))
+#if 1
     [formData appendPartWithFileData:UIImageJPEGRepresentation(image,1) name:@"userfile" fileName:@"image.jpg" mimeType:@"image/jpeg"];
-    //[formData appendPartWithFileData:UIImagePNGRepresentation(image) name:@"userfile" fileName:@"image.png" mimeType:@"image/png"];
+#else
+    [formData appendPartWithFileData:UIImagePNGRepresentation(image) name:@"userfile" fileName:@"image.png" mimeType:@"image/png"];
+#endif
 }
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
               NSLog(@"%s,%d JSON: %@",__FUNCTION__,__LINE__,responseObject);

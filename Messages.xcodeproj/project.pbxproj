@@ -26,6 +26,9 @@
 		C46D2EA01876A4B90074957D /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = C46D2E9C1876A4B90074957D /* LoginView.m */; };
 		C46D2EA11876A4B90074957D /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46D2E9E1876A4B90074957D /* LoginViewController.m */; };
 		C46D2EA41876AB700074957D /* GPJAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C46D2EA31876AB700074957D /* GPJAboutViewController.m */; };
+		C4D412481879229800DCB5B7 /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = C4D412431879229800DCB5B7 /* UIImage+Alpha.m */; };
+		C4D412491879229800DCB5B7 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = C4D412451879229800DCB5B7 /* UIImage+Resize.m */; };
+		C4D4124A1879229800DCB5B7 /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = C4D412471879229800DCB5B7 /* UIImage+RoundedCorner.m */; };
 		FF2FD12FFC974B069D018D41 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F4DD3A6F59E486D80CCB2C7 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -72,6 +75,12 @@
 		C46D2E9E1876A4B90074957D /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		C46D2EA21876AB700074957D /* GPJAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPJAboutViewController.h; sourceTree = "<group>"; };
 		C46D2EA31876AB700074957D /* GPJAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPJAboutViewController.m; sourceTree = "<group>"; };
+		C4D412421879229800DCB5B7 /* UIImage+Alpha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Alpha.h"; sourceTree = "<group>"; };
+		C4D412431879229800DCB5B7 /* UIImage+Alpha.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Alpha.m"; sourceTree = "<group>"; };
+		C4D412441879229800DCB5B7 /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
+		C4D412451879229800DCB5B7 /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
+		C4D412461879229800DCB5B7 /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RoundedCorner.h"; sourceTree = "<group>"; };
+		C4D412471879229800DCB5B7 /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +152,7 @@
 				C46D2E9418767B150074957D /* GPJSecondViewController.m */,
 				C46D2EA21876AB700074957D /* GPJAboutViewController.h */,
 				C46D2EA31876AB700074957D /* GPJAboutViewController.m */,
+				C4D412411879229800DCB5B7 /* UIImage+Resize */,
 				C46D2E981876A4B90074957D /* Login */,
 				C45DFF311876573A00674A7E /* Images.xcassets */,
 				C45DFF1D1876573A00674A7E /* Supporting Files */,
@@ -191,6 +201,19 @@
 				C41654101876D100005E12C5 /* CookieManager.m */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		C4D412411879229800DCB5B7 /* UIImage+Resize */ = {
+			isa = PBXGroup;
+			children = (
+				C4D412421879229800DCB5B7 /* UIImage+Alpha.h */,
+				C4D412431879229800DCB5B7 /* UIImage+Alpha.m */,
+				C4D412441879229800DCB5B7 /* UIImage+Resize.h */,
+				C4D412451879229800DCB5B7 /* UIImage+Resize.m */,
+				C4D412461879229800DCB5B7 /* UIImage+RoundedCorner.h */,
+				C4D412471879229800DCB5B7 /* UIImage+RoundedCorner.m */,
+			);
+			path = "UIImage+Resize";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -328,12 +351,15 @@
 			files = (
 				C46D2EA01876A4B90074957D /* LoginView.m in Sources */,
 				C46D2E9518767B150074957D /* GPJSecondViewController.m in Sources */,
+				C4D412481879229800DCB5B7 /* UIImage+Alpha.m in Sources */,
 				C45DFF2D1876573A00674A7E /* GPJFirstViewController.m in Sources */,
 				C41654111876D100005E12C5 /* CookieManager.m in Sources */,
+				C4D4124A1879229800DCB5B7 /* UIImage+RoundedCorner.m in Sources */,
 				C45DFF271876573A00674A7E /* GPJAppDelegate.m in Sources */,
 				C46D2EA11876A4B90074957D /* LoginViewController.m in Sources */,
 				C46D2EA41876AB700074957D /* GPJAboutViewController.m in Sources */,
 				C45DFF231876573A00674A7E /* main.m in Sources */,
+				C4D412491879229800DCB5B7 /* UIImage+Resize.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
