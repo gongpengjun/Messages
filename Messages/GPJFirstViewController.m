@@ -155,7 +155,9 @@
     [manager POST:url
        parameters:parameters
 constructingBodyWithBlock:^(id <AFMultipartFormData> formData) {
-        [formData appendPartWithFileData:UIImageJPEGRepresentation(image,1) name:@"userfile" fileName:@"image.jpg" mimeType:@"image/jpeg"];
+    // the data size of jpg is smaller than png
+    [formData appendPartWithFileData:UIImageJPEGRepresentation(image,1) name:@"userfile" fileName:@"image.jpg" mimeType:@"image/jpeg"];
+    //[formData appendPartWithFileData:UIImagePNGRepresentation(image) name:@"userfile" fileName:@"image.png" mimeType:@"image/png"];
 }
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
               NSLog(@"%s,%d JSON: %@",__FUNCTION__,__LINE__,responseObject);
