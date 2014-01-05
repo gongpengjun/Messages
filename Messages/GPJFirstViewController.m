@@ -16,12 +16,14 @@
 
 #define kAlertLogoutTag 1001
 
-@interface GPJFirstViewController () <UITextFieldDelegate>
+@interface GPJFirstViewController () <UITextFieldDelegate,UIActionSheetDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 {
     UIToolbar *toolBar;
     BOOL _textViewFirstFocus;
 }
-@property (weak, nonatomic) IBOutlet UITextField *messageTextField;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (nonatomic, weak) IBOutlet UITextField *messageTextField;
+@property (nonatomic, strong) UIImage *gottenImage;
 @end
 
 @implementation GPJFirstViewController
@@ -70,15 +72,62 @@
 
 #pragma mark - Image
 
-- (UIImage*)imageToUpload {
-    return [UIImage imageNamed:@"logout_button"];
+- (IBAction)imageButtonAction:(id)sender {
+    UIActionSheet *as = [[UIActionSheet alloc] initWithTitle:nil
+                                                    delegate:self
+                                           cancelButtonTitle:@"Cancel"
+                                      destructiveButtonTitle:nil
+                                           otherButtonTitles:@"Take Photo", @"Choose Photo", nil];
+    as.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
+    [as showInView:self.view];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == actionSheet.cancelButtonIndex) {
+    } else if (buttonIndex == actionSheet.firstOtherButtonIndex) {
+        [self takePhoto];
+    } else {
+        [self choosePhotos];
+    }
+}
+
+- (void)takePhoto {
+    NSLog(@"%s,%d",__FUNCTION__,__LINE__);
+    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:nil message:@"There is no camera!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alertView show];        
+        return;
+    }
+    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+    imagePicker.delegate = self;
+    imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    [self presentViewController:imagePicker animated:YES completion:nil];
+}
+
+- (void)choosePhotos {
+    NSLog(@"%s,%d",__FUNCTION__,__LINE__);
+    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+    imagePicker.delegate = self;
+    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    [self presentViewController:imagePicker animated:YES completion:nil];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo {
+    if(image) {
+        self.gottenImage = image;
+        self.imageView.image = image;
+    } else {
+        self.gottenImage = nil;
+        self.imageView.image = [UIImage imageNamed:@"placeholder"];
+    }
+    [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - Button Actions
 
 - (IBAction)sendAction:(id)sender
 {
-    UIImage *image = [self imageToUpload];
+    UIImage *image = self.gottenImage;
     if(self.messageTextField.text.length == 0 || !image)
     {
         UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:nil message:@"Message or Image is empty!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
@@ -99,20 +148,23 @@
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
     hud.dimBackground = YES;
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    //manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSLog(@"%s,%d manager.responseSerializer.acceptableContentTypes:%@",__FUNCTION__,__LINE__,manager.responseSerializer.acceptableContentTypes);
     NSString *url = @"http://api.gongpengjun.com:90/messages/comboupload.php";
     NSDictionary *parameters = @{@"name": username, @"message" : self.messageTextField.text};
     [manager POST:url
        parameters:parameters
 constructingBodyWithBlock:^(id <AFMultipartFormData> formData) {
-        [formData appendPartWithFileData:UIImageJPEGRepresentation(image, 1) name:@"userfile" fileName:@"logout_button.png" mimeType:@"image/png"];
+        [formData appendPartWithFileData:UIImageJPEGRepresentation(image,1) name:@"userfile" fileName:@"image.jpg" mimeType:@"image/jpeg"];
 }
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
-              NSLog(@"JSON: %@", responseObject);
+              NSLog(@"%s,%d JSON: %@",__FUNCTION__,__LINE__,responseObject);
               // Configure for text only and offset down
               if([responseObject objectForKey:@"error"]) {
                   [hud hide:NO];
                   UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"ERROR" message:responseObject[@"error"][@"prompt"] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-                  alert.tag = kAlertLogoutTag;
+                  if([responseObject[@"error"][@"code"] integerValue] == 40001)
+                      alert.tag = kAlertLogoutTag;
                   [alert show];
               } else {
                   hud.labelText = responseObject[@"message"];
@@ -122,7 +174,7 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData) {
               hud.removeFromSuperViewOnHide = YES;
               [hud hide:YES afterDelay:1];
           } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-              NSLog(@"Error: %@", error);
+              NSLog(@"%s,%d %@",__FUNCTION__,__LINE__,error);
               hud.mode = MBProgressHUDModeText;
               hud.labelText = [error localizedDescription];
               hud.margin = 10.f;
@@ -141,6 +193,8 @@ constructingBodyWithBlock:^(id <AFMultipartFormData> formData) {
 {
     if([self.messageTextField isFirstResponder])
         [self.messageTextField setText:@""];
+    self.gottenImage = nil;
+    self.imageView.image = [UIImage imageNamed:@"placeholder"];
 }
 
 - (void) leaveKeyboardMode
