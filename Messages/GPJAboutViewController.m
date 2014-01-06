@@ -67,7 +67,7 @@
 {
     if(indexPath.row == 1) {
         // do logout
-        NSLog(@"%s,%d Logout",__FUNCTION__,__LINE__);
+        //NSLog(@"%s,%d Logout",__FUNCTION__,__LINE__);
         [[NSNotificationCenter defaultCenter] postNotificationName:LOGOUT_NOTIFICATION object:self];        
     }
 }

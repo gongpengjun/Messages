@@ -40,7 +40,7 @@
 }
 
 - (void)authenticateHandler:(NSNotification *)notification {
-    NSLog(@"%s,%d",__FUNCTION__,__LINE__);
+    //NSLog(@"%s,%d",__FUNCTION__,__LINE__);
     
     NSDictionary *userDict = [notification userInfo];
     
@@ -52,12 +52,12 @@
     [manager POST:url
        parameters:parameters
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
-              NSLog(@"JSON: %@", responseObject);
+              //NSLog(@"JSON: %@", responseObject);
               if([responseObject objectForKey:@"error"]) {
                   [hud hide:NO];
                   [self showAlertWithTitle:@"ERROR" message:responseObject[@"error"][@"prompt"]];
               } else {
-                  NSLog(@"%s,%d %@",__FUNCTION__,__LINE__,responseObject[@"message"]);
+                  //NSLog(@"%s,%d %@",__FUNCTION__,__LINE__,responseObject[@"message"]);
                   [hud hide:NO];
                   [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"userLoggedIn"];
                   [[NSUserDefaults standardUserDefaults] setObject:userDict[@"username"] forKey:@"username"];
@@ -66,7 +66,7 @@
                   [CookieManager saveCookies];
               }
           } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-              NSLog(@"Error: %@", error);
+              //NSLog(@"Error: %@", error);
               [hud hide:NO];
               [self showAlertWithTitle:@"ERROR" message:[error localizedDescription]];
           }];
@@ -78,7 +78,7 @@
 }
 
 - (void)dealloc {
-    NSLog(@"[LoginViewController] Dealloc");
+    //NSLog(@"[LoginViewController] Dealloc");
     self.loginView = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:AUTHENTICATE_NOTIFICATION object:self.view];
 }

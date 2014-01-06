@@ -21,7 +21,7 @@
     self = [super initWithFrame:frame];
     
     if (self) {
-        NSLog(@"[LoginView] Init");
+        //NSLog(@"[LoginView] Init");
         self.backgroundColor = [UIColor colorWithRed:62/255.0 green:69/255.0 blue:76/255.0 alpha:1];
         
         [self createBackground];
@@ -66,7 +66,7 @@
 }
 
 - (void)loginButtonClicked:(id)sender {
-    NSLog(@"[LoginView] Login button clicked");
+    //NSLog(@"[LoginView] Login button clicked");
 
     [self hideKeyboard];
     
@@ -97,7 +97,7 @@
 }
 
 - (void)dealloc {
-    NSLog(@"[LoginView] Dealloc");
+    //NSLog(@"[LoginView] Dealloc");
 }
 
 @end
